@@ -1,38 +1,41 @@
+/// <reference types="cypress" />
+
 describe('Our first suite', () => {
-    describe ('Our suite section', () => {
-        beforeEach('code for every test', () => {
-            //repetitive code
-        })
-        it('some test code', () => {
+  it('first test', () => {
 
-        })
-        it('some test code', () => {
+    cy.visit('/')
+    cy.contains('Forms').click()
+    cy.contains('Form Layouts').click()
 
-        })
-        it('some test code', () => {
+    //by Tag Name
+    cy.get('input')
 
-        })
-    })
+    //by ID
+    cy.get('#inputEmail1')
 
-    it('first test', () => {
-        
-    })
-    it('second test', () => {
+    //by Class name
+    cy.get('.input-full-width')
 
-    })
-    it('third test', () => {
+    //by Attribute name
+    cy.get('[placeholder="Email"]')
+    
+    //by Attribute name and value
+    cy.get('[placeholder="Email"]')
 
-    })
+    //by Class value
+    cy.get('[class="input-full-width size-medium shape-rectangle"]')
+
+    //by Tag name and Attribute with value
+    cy.get('input[placeholder="Email"]')
+
+    //by Two different attributes 
+    cy.get('[placeholder="Email"][fullwidth][type="email"]')
+
+    //by Tag name, Attribute with value, ID and Class name
+    cy.get('input[placeholder="Email"]#inputEmail1.input-full-width')
+
+    //The most recommended way by Cypress
+    cy.get('[data-cy="imputEmail1"]')
+  })
 })
 
-describe('Our Second suite', () => {
-    it('first test', () => {
-        
-    })
-    it('second test', () => {
-
-    })
-    it('third test', () => {
-
-    })
-})
