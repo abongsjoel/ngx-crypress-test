@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const { IterableDiffers } = require("@angular/core")
+
 describe('Our first suite', () => {
   it('first test', () => {
 
@@ -36,6 +38,16 @@ describe('Our first suite', () => {
 
     //The most recommended way by Cypress
     cy.get('[data-cy="imputEmail1"]')
+  })
+
+  it.only('second test', () => {
+    cy.visit('/')
+    cy.contains('Forms').click()
+    cy.contains('Form Layouts').click()
+
+    cy.get('[data-cy="signInButton"]')
+
+    cy.contains('sign in')
   })
 })
 
