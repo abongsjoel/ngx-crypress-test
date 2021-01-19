@@ -47,7 +47,19 @@ describe('Our first suite', () => {
 
     cy.get('[data-cy="signInButton"]')
 
-    cy.contains('sign in')
+    cy.contains('Sign in')
+
+    cy.contains('[status=warning]', 'Sign in')
+
+    cy.get('#inputEmail3')
+      .parents('form')
+      .find('button')
+      .should('contain', 'Sign in')
+      .parents('form')
+      .find('nb-checkbox')
+      .click()
+
+    cy.contains('nb-card', 'Horizontal form').find('[type="email"]')
   })
 })
 
