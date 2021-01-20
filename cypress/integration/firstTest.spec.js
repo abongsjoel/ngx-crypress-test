@@ -127,7 +127,7 @@ describe('Our first suite', () => {
       })
   })
 
-  it.only('asset property', () => {
+  it('asset property', () => {
     cy.visit('/')
     cy.contains('Forms').click()
     cy.contains('Datepicker').click()
@@ -136,6 +136,31 @@ describe('Our first suite', () => {
       cy.wrap(input).click()
       cy.get('nb-calendar-day-picker').contains('13').click()
       cy.wrap(input).invoke('prop', 'value').should('contain', 'Jan 13, 2021')
+    })
+  })
+
+  it.only('radio button', () => {
+    cy.visit('/')
+    cy.contains('Forms').click()
+    cy.contains('Form Layouts').click()
+
+    cy.contains('nb-card', 'Using the Grid').find('[type="radio"]').then( radioButtons => {
+      cy.wrap(radioButtons)
+        .first()
+        .check({force: true})
+        .should('be.checked')
+        
+        cy.wrap(radioButtons)
+        .eq(1)
+        .check({force: true})
+        
+        cy.wrap(radioButtons)
+          .first()
+          .should('not.be.checked')
+
+        cy.wrap(radioButtons)
+          .eq(2)
+          .should('be.disabled')
     })
   })
 })
