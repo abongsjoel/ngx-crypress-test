@@ -139,7 +139,7 @@ describe('Our first suite', () => {
     })
   })
 
-  it.only('radio button', () => {
+  it('radio buttons', () => {
     cy.visit('/')
     cy.contains('Forms').click()
     cy.contains('Form Layouts').click()
@@ -162,6 +162,16 @@ describe('Our first suite', () => {
           .eq(2)
           .should('be.disabled')
     })
+  })
+
+  it.only('check boxes', () => {
+    cy.visit('/')
+    cy.contains('Modal & Overlays').click()
+    cy.contains('Toastr').click()
+
+    // cy.get('[type="checkbox"]').check({force: true})
+    cy.get('[type="checkbox"]').eq(0).click({force: true})
+    cy.get('[type="checkbox"]').eq(1).check({force: true})
   })
 })
 
