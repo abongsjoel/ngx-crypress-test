@@ -164,7 +164,7 @@ describe('Our first suite', () => {
     })
   })
 
-  it.only('check boxes', () => {
+  it('check boxes', () => {
     cy.visit('/')
     cy.contains('Modal & Overlays').click()
     cy.contains('Toastr').click()
@@ -172,6 +172,13 @@ describe('Our first suite', () => {
     // cy.get('[type="checkbox"]').check({force: true})
     cy.get('[type="checkbox"]').eq(0).click({force: true})
     cy.get('[type="checkbox"]').eq(1).check({force: true})
+  })
+
+  it.only('lists and dropdowns', () => {
+    cy.visit('/')
+
+    cy.get('nav nb-select').click()
+    cy.get('.options-list').contains('Dark').click()
   })
 })
 
