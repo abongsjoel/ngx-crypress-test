@@ -211,11 +211,25 @@ describe('Our first suite', () => {
     cy.contains('Tables & Data').click()
     cy.contains('Smart Table').click()
 
-    cy.get('tbody').contains('tr', 'Larry').then( tableRow => {
-      cy.wrap(tableRow).find('.nb-edit').click()
-      cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
+    //1
+    // cy.get('tbody').contains('tr', 'Larry').then( tableRow => {
+    //   cy.wrap(tableRow).find('.nb-edit').click()
+    //   cy.wrap(tableRow).find('[placeholder="Age"]').clear().type('25')
+    //   cy.wrap(tableRow).find('.nb-checkmark').click()
+    //   cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
+    // })
+
+    //2
+    cy.get('thead').find('.nb-plus').click()
+    cy.get('thead').find('tr').eq(2).then( tableRow => {
+      cy.wrap(tableRow).find('[placeholder="First Name"]').type('Joel')
+      cy.wrap(tableRow).find('[placeholder="Last Name"]').type('Chi')
       cy.wrap(tableRow).find('.nb-checkmark').click()
-      cy.wrap(tableRow).find('td').eq(6).should('contain', '25')
+    })
+
+    cy.get('tbody tr').first().find('td').then( tableColums => {
+      cy.wrap(tableColums).eq(2).should('contain', 'Joel')
+      cy.wrap(tableColums).eq(3).should('contain', 'Chi')
     })
 
 
