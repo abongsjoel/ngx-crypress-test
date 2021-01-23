@@ -232,6 +232,13 @@ describe('Our first suite', () => {
       cy.wrap(tableColums).eq(3).should('contain', 'Chi')
     })
 
+    //3
+    cy.get('thead [placeholder="Age"]').type('20')
+    cy.wait(500)
+    cy.get('tbody tr').each( tableRow => {
+      cy.wrap(tableRow).find('td').eq(6).should('contain', '20')
+    })
+
 
   })
 })
