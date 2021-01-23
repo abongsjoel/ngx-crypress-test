@@ -220,24 +220,35 @@ describe('Our first suite', () => {
     // })
 
     //2
-    cy.get('thead').find('.nb-plus').click()
-    cy.get('thead').find('tr').eq(2).then( tableRow => {
-      cy.wrap(tableRow).find('[placeholder="First Name"]').type('Joel')
-      cy.wrap(tableRow).find('[placeholder="Last Name"]').type('Chi')
-      cy.wrap(tableRow).find('.nb-checkmark').click()
-    })
+    // cy.get('thead').find('.nb-plus').click()
+    // cy.get('thead').find('tr').eq(2).then( tableRow => {
+    //   cy.wrap(tableRow).find('[placeholder="First Name"]').type('Joel')
+    //   cy.wrap(tableRow).find('[placeholder="Last Name"]').type('Chi')
+    //   cy.wrap(tableRow).find('.nb-checkmark').click()
+    // })
 
-    cy.get('tbody tr').first().find('td').then( tableColums => {
-      cy.wrap(tableColums).eq(2).should('contain', 'Joel')
-      cy.wrap(tableColums).eq(3).should('contain', 'Chi')
-    })
+    // cy.get('tbody tr').first().find('td').then( tableColums => {
+    //   cy.wrap(tableColums).eq(2).should('contain', 'Joel')
+    //   cy.wrap(tableColums).eq(3).should('contain', 'Chi')
+    // })
 
     //3
-    cy.get('thead [placeholder="Age"]').type('20')
-    cy.wait(500)
-    cy.get('tbody tr').each( tableRow => {
-      cy.wrap(tableRow).find('td').eq(6).should('contain', '20')
+    const ages = [20, 30, 40, 200]
+
+    cy.wrap(ages).each( age => {
+
+      cy.get('thead [placeholder="Age"]').clear().type(age)
+      cy.wait(500)
+      cy.get('tbody tr').each( tableRow => {
+        if( age == 200) {
+          cy.wrap(tableRow).should('contain', 'No data found')
+        } else {
+          cy.wrap(tableRow).find('td').eq(6).should('contain', age)
+        }
+      })
+
     })
+
 
 
   })
