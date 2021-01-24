@@ -104,11 +104,16 @@ describe('Our first suite', () => {
     cy.contains('Form Layouts').click()
 
     //1
-    cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
+    cy.get('[for="exampleInputEmail1"]')
+      .should('contain', 'Email address')
+      .should('have.class', 'label')
+      .and('have.text', 'Email address')
 
     //2
     cy.get('[for="exampleInputEmail1"]').then( label => {
       expect(label.text()).to.equal('Email address')
+      expect(label).to.have.class('label')
+      expect(label).to.have.text('Email address')
     })
 
     //3
@@ -127,7 +132,7 @@ describe('Our first suite', () => {
       })
   })
 
-  it('asset property', () => {
+  it.only('asset property', () => {
 
     function selectDayFromCurrent(day) {
       let date = new Date()
@@ -153,9 +158,10 @@ describe('Our first suite', () => {
     
     cy.contains('nb-card', 'Common Datepicker').find('input').then(input => {
       cy.wrap(input).click()
-      let dateAssert = selectDayFromCurrent(300)
+      let dateAssert = selectDayFromCurrent(1)
 
       cy.wrap(input).invoke('prop', 'value').should('contain', dateAssert)
+      cy.wrap(input).should('have.value', dateAssert)
     })
   })
 
@@ -283,7 +289,7 @@ describe('Our first suite', () => {
 
   })
 
-  it.only('dialog box', () => {
+  it('dialog box', () => {
     cy.visit('/')
     cy.contains('Tables & Data').click()
     cy.contains('Smart Table').click()
